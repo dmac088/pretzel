@@ -63,7 +63,7 @@ ALTER ROLE security_owner WITH NOSUPERUSER INHERIT NOCREATEROLE NOCREATEDB LOGIN
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.1
+-- Dumped from database version 14.4
 -- Dumped by pg_dump version 14.4
 
 SET statement_timeout = 0;
@@ -148,7 +148,7 @@ GRANT CONNECT ON DATABASE template1 TO PUBLIC;
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.1
+-- Dumped from database version 14.4
 -- Dumped by pg_dump version 14.4
 
 SET statement_timeout = 0;
@@ -196,7 +196,7 @@ SET row_security = off;
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.1
+-- Dumped from database version 14.4
 -- Dumped by pg_dump version 14.4
 
 SET statement_timeout = 0;
@@ -3183,7 +3183,7 @@ CREATE TABLE mochi.address (
     addr_ln_1 character varying(100),
     addr_ln_2 character varying(100),
     addr_ln_3 character varying(100),
-    addr_cnty character varying(100) NOT NULL,
+    addr_cnty character varying(100),
     addr_pst_cd character varying(10),
     addr_typ_id bigint NOT NULL,
     pty_id bigint
@@ -3488,7 +3488,7 @@ ALTER TABLE mochi.category_cat_id_seq OWNER TO mochidb_owner;
 CREATE TABLE mochi.category (
     cat_id bigint DEFAULT nextval('mochi.category_cat_id_seq'::regclass) NOT NULL,
     cat_cd character(5) NOT NULL,
-    cat_typ_id bigint,
+    cat_typ_id bigint NOT NULL,
     cat_lvl bigint,
     cat_prnt_cd character(5),
     cat_prnt_id bigint
@@ -4874,6 +4874,20 @@ CREATE TABLE mochi.tag_attr_lcl (
 
 
 ALTER TABLE mochi.tag_attr_lcl OWNER TO mochidb_owner;
+
+--
+-- Name: hibernate_sequence; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.hibernate_sequence
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hibernate_sequence OWNER TO postgres;
 
 --
 -- Name: permission; Type: TABLE; Schema: security; Owner: security_owner
@@ -15592,7 +15606,6 @@ COPY security.user_ (pty_id, account_expired, account_locked, credentials_expire
 234482	f	f	f	t	$2a$08$QDQfUEzVtkaILBRHdkVUquBq/ylLqS.DESfiNAvW0N11mw2a1kn0K	nob@nob	f	\N
 2030867	f	f	f	t	$2a$08$hcg54Vn8ksH8iv.Y2LTBr.mcGRBnNrv7EynIBNyBSBf/IhI0aoIlG	mackdad	f	\N
 234485	f	f	f	f	$2a$08$.KhZEsHxZO1fBcZ/iOzVPu2T5mk82K/jXGKb/q0fph/bQN3NmFApK	dmac1124	f	\N
-234489	f	f	f	t	$2a$08$AV8.r7Jm9K1/girJ6WZqzOvqRwxf4Jv9waE0oR0/DKePU0BOJaSr6	mackdada	f	\N
 \.
 
 
@@ -15642,7 +15655,6 @@ COPY security.user_role (id, pty_id, role_id) FROM stdin;
 227	234482	2
 255	2030867	2
 257	234485	2
-259	234489	2
 \.
 
 
@@ -16110,6 +16122,13 @@ SELECT pg_catalog.setval('mochi.tag_attr_lcl_tag_lcl_id_seq', 233275, true);
 --
 
 SELECT pg_catalog.setval('mochi.tag_tag_id_seq', 233273, true);
+
+
+--
+-- Name: hibernate_sequence; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.hibernate_sequence', 1, false);
 
 
 --
@@ -18673,7 +18692,7 @@ GRANT SELECT,INSERT,DELETE,UPDATE ON TABLE security.verification_token TO mochi_
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 14.1
+-- Dumped from database version 14.4
 -- Dumped by pg_dump version 14.4
 
 SET statement_timeout = 0;

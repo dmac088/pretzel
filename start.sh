@@ -1,3 +1,2 @@
 #!/bin/bash
-
-sudo service postgresql start
+pg_ctl -D /usr/local/var/postgres start
