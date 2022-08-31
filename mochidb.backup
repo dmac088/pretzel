@@ -15080,8 +15080,6 @@ COPY mochi.promotion_attr_lcl (prm_lcl_id, prm_id, prm_desc, lcl_cd) FROM stdin;
 --
 
 COPY mochi.promotion_bngn (prm_id, buy_qty, disc_pctg) FROM stdin;
-234464	2	0.5
-234467	3	0.33
 \.
 
 
